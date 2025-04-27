@@ -22,7 +22,7 @@ The API should support the following features:
 - Withdraw money from an account
   
 You can import the `postman.json` to your Postman to test the API. The base URL
-is `https://`. 
+is `https://woovi-code-challenge-production.up.railway.app/graphql`.
 
 ## Getting Started
 
