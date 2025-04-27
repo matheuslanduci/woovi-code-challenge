@@ -1,0 +1,31 @@
+{
+	"private": true,
+	"name": "woovi-playground",
+	"scripts": {
+		"build": "turbo run build",
+		"config:local": "turbo run config:local",
+		"dev": "turbo run dev",
+		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
+		"lint": "turbo run lint",
+		"relay": "turbo run relay",
+		"test": "turbo run test",
+		"schema": "turbo run schema",
+		"compose:up": "docker-compose -f docker-compose.yml up -d",
+		"compose-down": "docker-compose -f docker-compose down",
+		"postman": "gql2postman -s ./apps/server/src/schema/schema.graphql -o ./postman.json"
+	},
+	"devDependencies": {
+		"@babel/preset-env": "^7.23.8",
+		"@babel/preset-typescript": "^7.23.3",
+		"@woovi-playground/eslint-config-custom": "*",
+		"autoprefixer": "^10.4.16",
+		"babel-plugin-transform-barrels": "^1.0.10",
+		"eslint": "^8.53.0",
+		"graphql-to-postman": "^1.0.0",
+		"jest": "^29.7.0",
+		"jest-junit": "^16.0.0",
+		"prettier": "^3.1.0",
+		"turbo": "latest"
+	},
+	"packageManager": "pnpm@10.0.0"
+}

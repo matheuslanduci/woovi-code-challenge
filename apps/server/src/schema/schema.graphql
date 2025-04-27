@@ -1,0 +1,190 @@
+type Query {
+  accounts(
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+  ): AccountConnection
+  transactions(
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+  ): TransactionConnection
+}
+
+"""A connection to a list of items."""
+type AccountConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AccountEdge]
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+"""An edge in a connection."""
+type AccountEdge {
+  """The item at the end of the edge"""
+  node: Account
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""Represents an account"""
+type Account implements Node {
+  """The ID of an object"""
+  id: ID!
+  name: String
+  readonlyBalance: Int
+  createdAt: String
+  updatedAt: String
+  transactions(
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+  ): TransactionConnection
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""A connection to a list of items."""
+type TransactionConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [TransactionEdge]
+}
+
+"""An edge in a connection."""
+type TransactionEdge {
+  """The item at the end of the edge"""
+  node: Transaction
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""Represents a transaction"""
+type Transaction implements Node {
+  """The ID of an object"""
+  id: ID!
+  description: String
+  entries: [TransactionEntry]
+  createdAt: String!
+  updatedAt: String!
+}
+
+"""Represents a transaction entry"""
+type TransactionEntry {
+  accountId: String
+  account: Account
+  debit: Int
+  credit: Int
+  description: String
+}
+
+type Mutation {
+  AddAccount(input: AddAccountInput!): AddAccountPayload
+  RefreshAccountBalance(input: RefreshAccountBalanceInput!): RefreshAccountBalancePayload
+  Transfer(input: TransferInput!): TransferPayload
+  Withdraw(input: WithdrawInput!): WithdrawPayload
+}
+
+type AddAccountPayload {
+  account: Account
+  clientMutationId: String
+}
+
+input AddAccountInput {
+  """Name of the account"""
+  name: String!
+
+  """Initial balance of the account"""
+  initialBalance: Int!
+  clientMutationId: String
+}
+
+type RefreshAccountBalancePayload {
+  account: Account
+  clientMutationId: String
+}
+
+input RefreshAccountBalanceInput {
+  """ID of the account to refresh"""
+  sourceId: String!
+  clientMutationId: String
+}
+
+type TransferPayload {
+  transaction: Transaction
+  clientMutationId: String
+}
+
+input TransferInput {
+  """The amount to transfer in cents"""
+  amount: Int!
+
+  """ID of the account to withdraw from"""
+  sourceId: String!
+
+  """ID of the account to deposit to"""
+  destinationId: String!
+  clientMutationId: String
+}
+
+type WithdrawPayload {
+  transaction: Transaction
+  clientMutationId: String
+}
+
+input WithdrawInput {
+  """Amount to withdraw"""
+  amount: Int!
+
+  """ID of the account to withdraw from"""
+  sourceId: String!
+  clientMutationId: String
+}

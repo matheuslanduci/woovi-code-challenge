@@ -1,0 +1,52 @@
+{
+	"name": "@woovi-playground/server",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"config:local": "cp .env.example .env",
+		"dev": "tsx watch src/index.ts",
+		"schema": "tsx watch scripts/updateSchema.ts",
+		"test": "cross-env JEST_TRANSFORMER=babel-barrel jest --runInBand --detectOpenHandles"
+	},
+	"dependencies": {
+		"@entria/graphql-mongo-helpers": "^1.1.2",
+		"dataloader": "^2.2.2",
+		"dotenv": "^16.5.0",
+		"dotenv-safe": "^8.2.0",
+		"graphql": "^16.8.1",
+		"graphql-redis-subscriptions": "^2.6.0",
+		"graphql-relay": "^0.10.0",
+		"graphql-relay-subscription": "^1.0.0",
+		"graphql-subscriptions": "^2.0.0",
+		"graphql-ws": "^5.14.2",
+		"ioredis": "^5.6.1",
+		"kcors": "^2.2.2",
+		"koa": "^2.16.1",
+		"koa-bodyparser": "^4.4.0",
+		"koa-graphql": "^0.12.0",
+		"koa-logger": "^3.2.1",
+		"koa-router": "^12.0.1",
+		"mongodb": "^6.16.0",
+		"mongoose": "^7.8.4",
+		"uuid": "^11.1.0",
+		"ws": "^8.17.1",
+		"zod": "^3.24.3"
+	},
+	"devDependencies": {
+		"@types/dotenv-safe": "^8.1.6",
+		"@types/jest": "^29.5.14",
+		"@types/kcors": "^2.2.8",
+		"@types/koa": "^2.13.12",
+		"@types/koa-bodyparser": "^4.3.10",
+		"@types/koa-logger": "^3.1.5",
+		"@types/koa-router": "^7.4.8",
+		"@types/node": "^17.0.12",
+		"@types/uuid": "^10.0.0",
+		"@types/ws": "^8.18.1",
+		"cross-env": "^7.0.3",
+		"graphql-tag": "^2.12.6",
+		"supertest": "^7.1.0",
+		"supertest-graphql": "^1.1.4",
+		"tsx": "^3.12.6"
+	}
+}
