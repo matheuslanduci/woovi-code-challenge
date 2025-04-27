@@ -5,6 +5,7 @@ import { Account, IAccount } from '../modules/account/AccountModel'
 import { Transaction } from '../modules/transaction/TransactionModel'
 import { toGlobalId } from 'graphql-relay'
 import { ObjectId } from 'mongodb'
+import { randomUUID } from 'node:crypto'
 
 describe('RefreshAccountBalanceMutation', () => {
   let account: IAccount
@@ -25,7 +26,8 @@ describe('RefreshAccountBalanceMutation', () => {
           credit: 0,
           description: 'Initial balance'
         }
-      ]
+      ],
+      idempotencyKey: randomUUID()
     }).save()
     await new Transaction({
       description: 'Test transaction',
@@ -36,7 +38,8 @@ describe('RefreshAccountBalanceMutation', () => {
           credit: 500,
           description: 'Test transaction'
         }
-      ]
+      ],
+      idempotencyKey: randomUUID()
     }).save()
   })
 

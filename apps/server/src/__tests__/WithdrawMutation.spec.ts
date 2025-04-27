@@ -27,7 +27,8 @@ describe('WithdrawMutation', () => {
           credit: 0,
           description: 'Initial balance'
         }
-      ]
+      ],
+      idempotencyKey: randomUUID()
     }).save()
     await new Transaction({
       description: 'Test transaction',
@@ -38,7 +39,8 @@ describe('WithdrawMutation', () => {
           credit: 500,
           description: 'Test transaction'
         }
-      ]
+      ],
+      idempotencyKey: randomUUID()
     }).save()
   })
 
