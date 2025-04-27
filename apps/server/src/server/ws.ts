@@ -3,6 +3,7 @@ import { useServer } from 'graphql-ws/lib/use/ws'
 
 import { schema } from '../schema/schema'
 import { getContext } from './getContext'
+import { Context } from 'koa'
 
 export type ConnectionParams = { Authorization: string }
 
@@ -14,7 +15,7 @@ type WsContext = {
   connectionParams: ConnectionParams
 }
 
-export const ws = async (ctx) => {
+export const ws = async (ctx: Context) => {
   if (ctx.wss) {
     // handle upgrade
     const client = await ctx.ws()
@@ -25,7 +26,9 @@ export const ws = async (ctx) => {
         context: async (wsContext: WsContext) => getContext(),
         execute,
         subscribe,
+        // @ts-ignore
         onConnect: async (wsContext: WsContext) => {},
+        // @ts-ignore
         onSubscribe: async (wsContext: WsContext, message) => {
           const { operationName, query, variables } = message.payload
 

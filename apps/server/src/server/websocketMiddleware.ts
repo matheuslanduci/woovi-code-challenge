@@ -1,25 +1,29 @@
 import http from 'http'
+import { Context, Next } from 'koa'
 
-import WebSocket, { WebSocketServer as WSWebSocketServer } from 'ws'
+import { Server, WebSocket, WebSocketServer as WSWebSocketServer } from 'ws'
 
 // work with commonjs and esm
 const WebSocketServer = WSWebSocketServer
 
 export const createWebsocketMiddleware = (
   propertyName = 'ws',
-  options = {}
+  options: {
+    server?: http.Server | typeof WebSocketServer
+    wsOptions?: Record<string, unknown>
+  } = {}
 ) => {
   if (options instanceof http.Server) options = { server: options }
 
   // const wsServers = new WeakMap();
-  const wsServers = {}
+  const wsServers: Record<string, unknown> = {}
 
   const getOrCreateWebsocketServer = (url: string) => {
     // const server = wsServers.get(url);
-    const server = wsServers[url]
+    const server = wsServers[url] || null
 
     if (server) {
-      return server
+      return server as Server<typeof WebSocket, typeof http.IncomingMessage>
     }
 
     const newServer = new WebSocketServer({
@@ -33,7 +37,7 @@ export const createWebsocketMiddleware = (
     return newServer
   }
 
-  const websocketMiddleware = async (ctx, next) => {
+  const websocketMiddleware = async (ctx: Context, next: Next) => {
     const upgradeHeader = (ctx.request.headers.upgrade || '')
       .split(',')
       .map((s) => s.trim())

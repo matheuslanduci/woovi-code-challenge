@@ -9,6 +9,7 @@
 		"lint": "turbo run lint",
 		"relay": "turbo run relay",
 		"test": "turbo run test",
+		"start": "turbo run start",
 		"schema": "turbo run schema",
 		"compose:up": "docker-compose -f docker-compose.yml up -d",
 		"compose-down": "docker-compose -f docker-compose down",

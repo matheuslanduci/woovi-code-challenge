@@ -38,3 +38,6 @@ npm-debug.log*
 # ide
 
 .vscode
+
+# builds
+dist

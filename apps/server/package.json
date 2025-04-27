@@ -5,6 +5,8 @@
 	"scripts": {
 		"config:local": "cp .env.example .env",
 		"dev": "tsx watch src/index.ts",
+		"build": "tsup src/index.ts --format cjs,esm --dts",
+		"start": "node dist/index.js",
 		"schema": "tsx watch scripts/updateSchema.ts",
 		"test": "cross-env JEST_TRANSFORMER=babel-barrel jest --runInBand --detectOpenHandles"
 	},
@@ -47,6 +49,7 @@
 		"graphql-tag": "^2.12.6",
 		"supertest": "^7.1.0",
 		"supertest-graphql": "^1.1.4",
+		"tsup": "^8.4.0",
 		"tsx": "^3.12.6"
 	}
 }
