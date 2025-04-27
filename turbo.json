@@ -1,9 +1,10 @@
 {
 	"$schema": "https://turbo.build/schema.json",
 	"globalDependencies": ["**/.env.*local"],
+	"globalEnv": ["REDIS_HOST", "MONGO_URI", "PORT"],
 	"tasks": {
 		"build": {
-			"outputs": [".next/**", "!.next/cache/**"]
+			"outputs": ["dist/**"]
 		},
 		"config:local": {},
 		"test": {},
