@@ -23,7 +23,7 @@
 		"graphql-ws": "^5.14.2",
 		"ioredis": "^5.6.1",
 		"kcors": "^2.2.2",
-		"koa": "^2.16.1",
+		"koa": "^3.0.1",
 		"koa-bodyparser": "^4.4.0",
 		"koa-graphql": "^0.12.0",
 		"koa-logger": "^3.2.1",
